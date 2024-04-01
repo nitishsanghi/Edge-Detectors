@@ -1,6 +1,3 @@
-Given your request for a detailed GitHub README tailored for the `EdgeDetector` class, below is a more fleshed-out template. This version includes sections that explain the purpose of the project, provide detailed setup instructions, offer examples of how to use the library, and encourage community involvement. Adjust the details as necessary to fit your project's specifics.
-
-```markdown
 # Edge Detection Library
 
 The Edge Detection Library is a versatile C++ toolkit designed to facilitate the detection of edges in images. Leveraging the power of Eigen for matrix operations and OpenCV for comprehensive image processing, this library currently supports a suite of Sobel edge detection methods. It's built with extensibility in mind, making it an ideal starting point for implementing and experimenting with various edge detection algorithms.
@@ -90,19 +87,3 @@ We welcome contributions from the community, whether it's adding new features, i
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Acknowledgments
-
-- Thanks to the Eigen library team for providing an efficient algebra toolkit.
-- Gratitude to the OpenCV contributors for maintaining a robust image processing library.
-
-## Contact
-
-- Your Name - [your.email@example.com](mailto:your.email@example.com)
-- Project Link: [https://github.com/<your-username>/EdgeDetectionLibrary](https://github.com/<your-username>/EdgeDetectionLibrary)
-
-We hope you find the Edge Detection Library useful for your projects and look forward to seeing what you build with it!
-```
-
-This README template provides a comprehensive overview of your project, guiding potential users through installation, a quick start guide, and how to contribute to the project. Make sure to replace placeholders (like `<your-username>`, `YourFeature`, and your contact information) with your actual data. As your project evolves, keep the README updated to reflect new features or changes in how the project should be used or built.
-
