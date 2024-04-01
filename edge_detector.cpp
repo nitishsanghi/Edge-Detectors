@@ -97,7 +97,7 @@ bool EdgeDetector::saveEdgeImage(std::string filename, Eigen::MatrixXd edges){
     return true;
 }
 
-// Apply the specified Sobel detector to the image and return the result
+/*// Apply the specified Sobel detector to the image and return the result
 Eigen::MatrixXd EdgeDetector::applyDetector(DetectorType detector_type){
     this->convertToGrayscale(); // First, convert the image to grayscale
     // Apply the specified Sobel filter based on the detector type
@@ -109,7 +109,7 @@ Eigen::MatrixXd EdgeDetector::applyDetector(DetectorType detector_type){
         case DetectorType::SOBEL:
             return sobel();
     }
-}
+}*/
 
 // Convert the loaded image to grayscale
 bool EdgeDetector::convertToGrayscale() {
@@ -124,7 +124,7 @@ bool EdgeDetector::convertToGrayscale() {
     return true;
 }
 
-// Implementation of the Sobel X filter
+/*// Implementation of the Sobel X filter
 Eigen::MatrixXd EdgeDetector::sobelX(){
     // Define the Sobel X kernel
     Eigen::MatrixXd Gx(3,3);
@@ -168,4 +168,89 @@ Eigen::MatrixXd EdgeDetector::sobel(){
     // Compute the magnitude of the gradient
     Eigen::MatrixXd sobel_mag = (sobel_x.array().square() + sobel_y.array().square()).sqrt();
     return sobel_mag;
+}*/
+
+
+
+// Apply the specified Sobel detector to the image and return the result
+Eigen::MatrixXd EdgeDetector::applyDetector(DetectorType detector_type, GradientType direction){
+    this->convertToGrayscale(); // First, convert the image to grayscale
+    // Apply the specified Sobel filter based on the detector type
+    switch (detector_type){
+        case DetectorType::SOBEL:
+            return sobel(direction);
+        case DetectorType::PREWITT:
+            return prewitt(direction);
+    }
+}
+
+void EdgeDetector::kernel_processor(Eigen::MatrixXd& edges, Eigen::MatrixXd kernel){
+    for(int i = 1; i < height - 1; ++i){
+        for(int j = 1; j < width - 1; ++j){
+            edges(i, j) = (kernel.array() * gray_image.block(i - 1, j - 1, 3, 3).array()).sum();
+        }
+    }
+}
+
+// Implementation of the Sobel X filter
+Eigen::MatrixXd EdgeDetector::sobel(GradientType direction){
+    // Define the Sobel X kernel
+    Eigen::MatrixXd Gx(3,3);
+    Gx << -1, 0, 1,
+          -2, 0, 2,
+          -1, 0, 1;
+    
+    Eigen::MatrixXd Gy = Gx.transpose();
+    Eigen::MatrixXd edges(height, width);
+    switch (direction)
+    {
+    case GradientType::X:
+        kernel_processor(edges, Gx);
+        break;
+    case GradientType::Y:
+        kernel_processor(edges, Gy);
+        break;
+    case GradientType::MAG:
+        Eigen::MatrixXd edges_x(height, width);
+        kernel_processor(edges_x, Gx);
+
+        Eigen::MatrixXd edges_y(height, width);
+        kernel_processor(edges_y, Gy);
+
+        edges = (edges_x.array().square() + edges_y.array().square()).sqrt();
+        break;
+    }
+
+    return edges;
+}
+
+Eigen::MatrixXd EdgeDetector::prewitt(GradientType direction){
+    // Define the Prewitt X kernel
+    Eigen::MatrixXd Gx(3,3);
+    Gx << -1, 0, 1,
+          -1, 0, 1,
+          -1, 0, 1;
+    
+    Eigen::MatrixXd Gy = Gx.transpose();
+    Eigen::MatrixXd edges(height, width);
+    switch (direction)
+    {
+    case GradientType::X:
+        kernel_processor(edges, Gx);
+        break;
+    case GradientType::Y:
+        kernel_processor(edges, Gy);
+        break;
+    case GradientType::MAG:
+        Eigen::MatrixXd edges_x(height, width);
+        kernel_processor(edges_x, Gx);
+
+        Eigen::MatrixXd edges_y(height, width);
+        kernel_processor(edges_y, Gy);
+
+        edges = (edges_x.array().square() + edges_y.array().square()).sqrt();
+        break;
+    }
+    
+    return edges;
 }

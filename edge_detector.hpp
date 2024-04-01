@@ -24,9 +24,14 @@ class EdgeDetector{
 
         // Enumeration to specify the type of edge detection method to use
         enum class DetectorType{
-            SOBEL_X,  // Detect edges in the X direction
-            SOBEL_Y,  // Detect edges in the Y direction
-            SOBEL,    // Detect edges in both X and Y directions
+            SOBEL,  
+            PREWITT, 
+        };
+
+        enum class GradientType{
+            X,  // Detect edges in the X direction
+            Y,  // Detect edges in the Y direction
+            MAG,    // Detect edges in both X and Y directions
         };
         
         // Default constructor and destructor
@@ -36,7 +41,7 @@ class EdgeDetector{
         // Load an image from a file
         bool loadImage(std::string filename);
         // Apply the specified edge detection filter and return the result
-        Eigen::MatrixXd applyDetector(DetectorType detector_type);
+        Eigen::MatrixXd applyDetector(DetectorType detector_type, GradientType direction);
         // Save the processed image back to a file
         bool saveImage(std::string, ImageType image_type = ImageType::COLOR);
         // Save the edge-detected image to a file
@@ -53,9 +58,18 @@ class EdgeDetector{
         Eigen::MatrixXd gray_image;
     
         // Sobel filter implementations for edge detection
-        Eigen::MatrixXd sobelX(); // Sobel filter in X direction
+        /*Eigen::MatrixXd sobelX(); // Sobel filter in X direction
         Eigen::MatrixXd sobelY(); // Sobel filter in Y direction
-        Eigen::MatrixXd sobel();  // Combination of Sobel X and Y filters
+        Eigen::MatrixXd sobel();  // Combination of Sobel X and Y filters*/
+        Eigen::MatrixXd sobel(GradientType direction);
+
+        // Prewitt filter implementations for edge detection
+        Eigen::MatrixXd prewittX(); // Prewitt filter in X direction
+        Eigen::MatrixXd prewittY(); // Prewitt filter in Y direction
+        Eigen::MatrixXd prewitt(GradientType direction);  // Combination of Prewitt X and Y filters
+        void kernel_processor(Eigen::MatrixXd& edges, Eigen::MatrixXd kernel);
+        
+
         // Convert loaded image to grayscale
         bool convertToGrayscale();
 
