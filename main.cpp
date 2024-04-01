@@ -3,15 +3,15 @@
 int main(){
 
     std::string input_image_path = "/Users/nitishsanghi/Documents/Stereo-Matching/000000_10.png";
-    std::string output_image_path = "/Users/nitishsanghi/Documents/Edge-Detector/000000_10_sobel.png";
-    std::string output_image_pathx = "/Users/nitishsanghi/Documents/Edge-Detector/000000_10_sobelx.png";
-    std::string output_image_pathy = "/Users/nitishsanghi/Documents/Edge-Detector/000000_10_sobely.png";
-    std::string output_image_pathp = "/Users/nitishsanghi/Documents/Edge-Detector/000000_10_p.png";
-    std::string output_image_pathpx = "/Users/nitishsanghi/Documents/Edge-Detector/000000_10_px.png";
-    std::string output_image_pathpy = "/Users/nitishsanghi/Documents/Edge-Detector/000000_10_py.png";
-    std::string output_image_pathr = "/Users/nitishsanghi/Documents/Edge-Detector/000000_10_r.png";
-    std::string output_image_pathrx = "/Users/nitishsanghi/Documents/Edge-Detector/000000_10_rx.png";
-    std::string output_image_pathry = "/Users/nitishsanghi/Documents/Edge-Detector/000000_10_ry.png";
+    std::string output_image_path = "/Users/nitishsanghi/Documents/Edge-Detector/Images/000000_10_sobel.png";
+    std::string output_image_pathx = "/Users/nitishsanghi/Documents/Edge-Detector/Images/000000_10_sobelx.png";
+    std::string output_image_pathy = "/Users/nitishsanghi/Documents/Edge-Detector/Images/000000_10_sobely.png";
+    std::string output_image_pathp = "/Users/nitishsanghi/Documents/Edge-Detector/Images/000000_10_p.png";
+    std::string output_image_pathpx = "/Users/nitishsanghi/Documents/Edge-Detector/Images/000000_10_px.png";
+    std::string output_image_pathpy = "/Users/nitishsanghi/Documents/Edge-Detector/Images/000000_10_py.png";
+    std::string output_image_pathr = "/Users/nitishsanghi/Documents/Edge-Detector/Images/000000_10_r.png";
+    std::string output_image_pathrx = "/Users/nitishsanghi/Documents/Edge-Detector/Images/000000_10_rx.png";
+    std::string output_image_pathry = "/Users/nitishsanghi/Documents/Edge-Detector/Images/000000_10_ry.png";
  
     EdgeDetector detector;
     detector.loadImage(input_image_path);
